@@ -1,89 +1,55 @@
-const Manga = require('../models/mangas.model')
+ const Manga = require('../models/mangas.model')
 
-const postManga = async(req, res, next) =>{
-    try{
-        const {title} = req.body;
-        const manga = new Manga({title})
+ const postMangas = async(req, res, next) =>{
+     try{
+        const manga = new Manga(req.body)
         const mangaInserted = await manga.save()
-
         return res.status(201).json(mangaInserted)
 
     }catch(error){
-        return next(error);
-    }
+         return next(error);
+     }
 
-}
+ }
 
-const postManga = async(req, res, next) =>{
-    try{
-        const {year} = req.body;
-        const manga = new Manga({year})
-        const mangaInserted = await manga.save()
 
-        return res.status(201).json(mangaInserted)
+ const getMangas = async (req, res, next) =>{
+     try{
+        const mangas = await Manga.find().populate('tag').populate('user');
+         return res.status(200).json(mangas)
 
-    }catch(error){
-        return next(error);
-    }
+     }catch(error){
+         return next(error)
+     }
+ }
 
-}
+ const getMangasByUser = async (req, res, next) => {
+     try{
+         constIdLogeado = req.user._id
+         console.log(userIdLogeado)
+         const mangasMongo = await Manga.find({user:userIdLogeado}).populate('tag')
+         return res.status(200).json(mangasMongo)
+        
+     }catch(error){
+         return next(error)
+     }
+ }
 
-const postManga = async(req, res, next) =>{
-    try{
-        const {description} = req.body;
-        const manga = new Manga({description})
-        const mangaInserted = await manga.save()
-
-        return res.status(201).json(mangaInserted)
-
-    }catch(error){
-        return next(error);
-    }
-
-}
-
-const postManga = async(req, res, next) =>{
-    try{
-        const {image} = req.body;
-        const manga = new Manga({image})
-        const mangaInserted = await manga.save()
-
-        return res.status(201).json(mangaInserted)
-
-    }catch(error){
-        return next(error);
-    }
-
-}
-
-const postManga = async(req, res, next) =>{
-    try{
-        const {tags} = req.body;
-        const manga = new Manga({tags})
-        const mangaInserted = await manga.save()
-
-        return res.status(201).json(mangaInserted)
-
-    }catch(error){
-        return next(error);   
-    }
-
-}
-
-const getMangas = async (req, res, next) =>{
-    try{
-        const mangas = await Manga.find();
-        return res.status(200).json(mangas)
-
-    }catch(error){
-        return next(error)
-    }
-}
+ const deleteManga = async (req, res, next) =>{
+     try{
+         const {id} = req.params
+         const deletedManga = await Manga.findByIdAndDelete(id)
+         return res.status(200).json(deletedProduct)
+     }catch(error){
+         return next(error)
+     }
+ }
 
 
 
-
-module.exports = {
-    postManga,
-    getMangas
-}
+ module.exports = {
+    postMangas,
+     getMangas,
+     deleteManga,
+     getMangasByUser 
+ }
