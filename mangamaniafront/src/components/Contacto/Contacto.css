@@ -1,0 +1,12 @@
+.input{
+    font-family: Arial, Helvetica, sans-serif;
+    border: 1px solid red;
+}
+
+.text{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+label{
+    font-weight: bold;
+}

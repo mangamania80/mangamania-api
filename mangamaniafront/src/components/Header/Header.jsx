@@ -13,6 +13,7 @@ const Header = () => {
               <Link to={'/home'} class="b-nav__link">Mangamania</Link>
               <Link to={'/home'} class="b-nav__link" >Home</Link>
               <Link to={'/mangas'} class="b-nav__link" >Mangas</Link>
+              <Link to={'/contacto'} class="b-nav__link" >Contacto</Link>
 
         </nav>
 
